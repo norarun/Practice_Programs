@@ -1,6 +1,6 @@
 /**
  *
- * @author 2200096
+ * @author noraru
  */
 package OCR;
 
@@ -8,16 +8,12 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-
 import javax.imageio.ImageIO;
-
 import net.sourceforge.tess4j.ITessAPI.TessPageIteratorLevel;
 import net.sourceforge.tess4j.ITesseract;
 import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
 import net.sourceforge.tess4j.Word;
-
-
 
 public class TestOcr {
  
