@@ -3,87 +3,89 @@ Attribute VB_Name = "Module1"
 '
 'file:  test
 'Date:  2021/06/04
-'—p“r:  ‘¼ƒV[ƒg‚©‚çğŒ‚É‚ ‚éî•ñ‚ğ‚Ü‚Æ‚ß‚é
+'ç”¨é€”:  ä»–ã‚·ãƒ¼ãƒˆã‹ã‚‰æ¡ä»¶ã«ã‚ã‚‹æƒ…å ±ã‚’ã¾ã¨ã‚ã‚‹
 '
+'<<-->>ã®éƒ¨åˆ†ã‚’å¤‰æ›´ã—ã¦ã¿ã¦ãã ã•ã„ã€‚
 'ver. 1.0
 '================================
 
-'’è”
-Dim SheetName As String      '<<‚±‚±‚ÉAo—Í‚µ‚½‚¢ƒV[ƒg‚Ì–¼‘O‚ğ“ü‚ê‚é>>
-Dim require As Date          '<<‚±‚±‚ÍAğŒADate‚É‚È‚Á‚Ä‚é‚Ì‚ÅğŒ‚É‡‚í‚¹‚Ä•Ï”éŒ¾‚µ‚Ä‚­‚¾‚³‚¢B>>
+'å®šæ•°
+Dim SheetName As String      '<<ã“ã“ã«ã€å‡ºåŠ›ã—ãŸã„ã‚·ãƒ¼ãƒˆã®åå‰ã‚’å…¥ã‚Œã‚‹>> const SheetName As String = "ã‚·ãƒ¼ãƒˆå"ã§ã‚‚OK    //ã“ã®å ´åˆã€24è¡Œç›®ãŒè¦ã‚‰ãªã„ã€‚
+Dim require As Date          '<<ã“ã“ã¯ã€æ¡ä»¶ã€Dateã«ãªã£ã¦ã‚‹ã®ã§æ¡ä»¶ã«åˆã‚ã›ã¦å¤‰æ•°å®£è¨€ã—ã¦ãã ã•ã„ã€‚>>  ã“ã“ã‚‚ä¸Šã‚’å‚ç…§ã€‚
 
-'•Ï”
-Dim flg As Boolean                          'ƒCƒ“ƒ^[ƒoƒ‹‚ÌÀsˆ—
+'å¤‰æ•°
+Dim flg As Boolean                          'ã‚¤ãƒ³ã‚¿ãƒ¼ãƒãƒ«ã®å®Ÿè¡Œå‡¦ç†
 
 
 '***********************
-'ƒƒCƒ“
+'ãƒ¡ã‚¤ãƒ³
 '***********************
 Sub SampleMain_onClick()
-    '•Ï”
-    require = Cells(4, 12).Value    'w’èƒV[ƒg‚Ì•ª‚©‚è‚â‚·‚¢Š‚ğw’èAğŒ
-    SheetName = Cells(5, 12).Value  'w’èƒV[ƒg‚Ì•ª‚©‚è‚â‚·‚¢Š‚ğw’èAƒV[ƒg‚Ì–¼‘O
+    '<<å¤‰æ•° ä¸Šè¨˜ã®13 è¡Œç›®ã‚’å¤‰ãˆãŸã‚‰ã“ã“ã‚‚å¤‰ãˆã‚‹>>
+    require = Cells(4, 12).Value    'æŒ‡å®šã‚·ãƒ¼ãƒˆã®åˆ†ã‹ã‚Šã‚„ã™ã„æ‰€ã‚’æŒ‡å®šã€æ¡ä»¶
+    SheetName = Cells(5, 12).Value  'æŒ‡å®šã‚·ãƒ¼ãƒˆã®åˆ†ã‹ã‚Šã‚„ã™ã„æ‰€ã‚’æŒ‡å®šã€ã‚·ãƒ¼ãƒˆã®åå‰
     
-    Dim A() As String   '”z—ñ
-    Dim B() As String   '”z—ñ
-    Dim C() As Date     '”z—ñ
-    Dim D() As String   '”z—ñ
+    '<<åˆ—ã®æ•°ã«åˆã‚ã›ã¦å¢—ã‚„ã—ãŸã‚Šã€æ¸›ã‚‰ã—ãŸã‚Šã—ã¦ãã ã•ã„>>
+    Dim A() As String   'é…åˆ—
+    Dim B() As String   'é…åˆ—
+    Dim C() As Date     'é…åˆ—
+    Dim D() As String   'é…åˆ—
     
     Dim t As String
     
-    '‰Šú‰»Aƒ†[ƒU[ƒƒ\ƒbƒh
+    'åˆæœŸåŒ–ã€ãƒ¦ãƒ¼ã‚¶ãƒ¼ãƒ¡ã‚½ãƒƒãƒ‰
     Call syokika_onClick
     
-    Application.ScreenUpdating = False          '‰æ–Êˆ—STOP
+    Application.ScreenUpdating = False          'ç”»é¢å‡¦ç†STOP
     
-    'ƒV[ƒg1‚©‚çƒXƒ^[ƒgA˜A‘z”z—ñ
+    'ã‚·ãƒ¼ãƒˆ1ã‹ã‚‰é †ç•ªã«å®Ÿè¡Œã€é€£æƒ³é…åˆ—
     For Each mySheet In Worksheets
-        If Not mySheet.Name = SheetName Then                 '‚à‚µAo—Íw’èƒV[ƒg‚È‚ç”ò‚Î‚·
-            Max_i = Worksheets(mySheet.Name).Range("A" & rows.count).End(xlUp).Row              '‘I‘ğ‚µ‚Ä‚éƒV[ƒg‚ÌÅ‘å s ”æ“¾
-            Worksheets(mySheet.Name).Activate
+        If Not mySheet.Name = SheetName Then                 'ã‚‚ã—ã€å‡ºåŠ›æŒ‡å®šã‚·ãƒ¼ãƒˆãªã‚‰é£›ã°ã™
+            Max_i = Worksheets(mySheet.Name).Range("A" & rows.count).End(xlUp).Row              'é¸æŠã—ã¦ã‚‹ã‚·ãƒ¼ãƒˆã®æœ€å¤§ è¡Œ æ•°å–å¾—
+            Worksheets(mySheet.Name).Activate                                                   'ãƒ¯ãƒ¼ã‚¯ã‚·ãƒ¼ãƒˆã‚’ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã«ã—ã¦ã„ã‚‹ã€‚
             
             
-            '‘}“ü
+            'æŒ¿å…¥
             For i = 1 To (Max_i - 2)
-            
-                If require <= Cells(i + 1, 3).Value Then    'ğŒ
-                    If isArrayEx(A) = -1 Then               '‰Šú‰»‚Ì”»’èAƒ†[ƒU[ƒƒ\ƒbƒh
+                '<<ã“ã“ã¯ã€å®£è¨€ã—ãŸé…åˆ—ã«æ²¿ã£ã¦å¤‰æ›´ã‚’åŠ ãˆã¦ãã ã•ã„>>
+                If require <= Cells(i + 1, 3).Value Then    'æ¡ä»¶æ–‡
+                    If isArrayEx(A) = -1 Then               'åˆæœŸåŒ–ã®åˆ¤å®šã€ãƒ¦ãƒ¼ã‚¶ãƒ¼ãƒ¡ã‚½ãƒƒãƒ‰
                         
-                        ReDim Preserve A(0)                     '‰Šú‰»‚³‚ê‚Ä‚¢‚È‚¢‚Ì‚Å‰Šú‰»
-                        ReDim Preserve B(0)                     '‰Šú‰»‚³‚ê‚Ä‚¢‚È‚¢‚Ì‚Å‰Šú‰»
-                        ReDim Preserve C(0)                     '‰Šú‰»‚³‚ê‚Ä‚¢‚È‚¢‚Ì‚Å‰Šú‰»
-                        ReDim Preserve D(0)                     '‰Šú‰»‚³‚ê‚Ä‚¢‚È‚¢‚Ì‚Å‰Šú‰»
+                        ReDim Preserve A(0)                     'åˆæœŸåŒ–ã•ã‚Œã¦ã„ãªã„ã®ã§åˆæœŸåŒ–
+                        ReDim Preserve B(0)                     'åˆæœŸåŒ–ã•ã‚Œã¦ã„ãªã„ã®ã§åˆæœŸåŒ–
+                        ReDim Preserve C(0)                     'åˆæœŸåŒ–ã•ã‚Œã¦ã„ãªã„ã®ã§åˆæœŸåŒ–
+                        ReDim Preserve D(0)                     'åˆæœŸåŒ–ã•ã‚Œã¦ã„ãªã„ã®ã§åˆæœŸåŒ–
                         
                     Else
                         
-                        ReDim Preserve A(UBound(A) + 1)         '”z—ñ‚ğ‘‚â‚·
-                        ReDim Preserve B(UBound(B) + 1)         '”z—ñ‚ğ‘‚â‚·
-                        ReDim Preserve C(UBound(C) + 1)         '”z—ñ‚ğ‘‚â‚·
-                        ReDim Preserve D(UBound(D) + 1)         '”z—ñ‚ğ‘‚â‚·
+                        ReDim Preserve A(UBound(A) + 1)         'é…åˆ—ã‚’å¢—ã‚„ã™
+                        ReDim Preserve B(UBound(B) + 1)         'é…åˆ—ã‚’å¢—ã‚„ã™
+                        ReDim Preserve C(UBound(C) + 1)         'é…åˆ—ã‚’å¢—ã‚„ã™
+                        ReDim Preserve D(UBound(D) + 1)         'é…åˆ—ã‚’å¢—ã‚„ã™
                         
                     End If
-                    
-                        A(UBound(A)) = Cells(i + 1, 1).Value    '’l‚ğ‘}“ü‚µ‚Ä‚¢‚é
-                        B(UBound(B)) = Cells(i + 1, 2).Value    '’l‚ğ‘}“ü‚µ‚Ä‚¢‚é
-                        C(UBound(C)) = Cells(i + 1, 3).Value    '’l‚ğ‘}“ü‚µ‚Ä‚¢‚é
-                        D(UBound(D)) = Cells(i + 1, 4).Value    '’l‚ğ‘}“ü‚µ‚Ä‚¢‚é
+                        '<<ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€ã€€â†“ã€€ã©ã®åˆ—ã‹ç¢ºèªã—ã¦ã‹ã‚‰è¨­å®šã‚’è¡Œã†æ§˜ã«ã€‚>>
+                        A(UBound(A)) = Cells(i + 1, 1).Value    'å€¤ã‚’æŒ¿å…¥ã—ã¦ã„ã‚‹
+                        B(UBound(B)) = Cells(i + 1, 2).Value    'å€¤ã‚’æŒ¿å…¥ã—ã¦ã„ã‚‹
+                        C(UBound(C)) = Cells(i + 1, 3).Value    'å€¤ã‚’æŒ¿å…¥ã—ã¦ã„ã‚‹
+                        D(UBound(D)) = Cells(i + 1, 4).Value    'å€¤ã‚’æŒ¿å…¥ã—ã¦ã„ã‚‹
                         
                 End If
             Next i
         End If
     Next
     
-    '•\¦
-    Application.ScreenUpdating = True       '‰æ–Êˆ—ŠJn
+    'è¡¨ç¤º
+    Application.ScreenUpdating = True       'ç”»é¢å‡¦ç†é–‹å§‹
     Worksheets(SheetName).Activate
             
     For i = 1 To (UBound(A))
         index = i
-    
-        Cells(index, 1).Value = A(i) '’l‚ğCell‚É‘}“ü‚µ‚Ä‚¢‚é
-        Cells(index, 2).Value = B(i) '’l‚ğCell‚É‘}“ü‚µ‚Ä‚¢‚é
-        Cells(index, 3).Value = C(i) '’l‚ğCell‚É‘}“ü‚µ‚Ä‚¢‚é
-        Cells(index, 4).Value = D(i) '’l‚ğCell‚É‘}“ü‚µ‚Ä‚¢‚é
+        'å®£è¨€ã—ãŸé…åˆ—ã®æ•°ã«ã‚ˆã£ã¦ã€ã“ã“ã‚’å¤‰æ›´ã—ã¦ãã ã•ã„ã€‚
+        Cells(index, 1).Value = A(i) 'å€¤ã‚’Cellã«æŒ¿å…¥ã—ã¦ã„ã‚‹
+        Cells(index, 2).Value = B(i) 'å€¤ã‚’Cellã«æŒ¿å…¥ã—ã¦ã„ã‚‹
+        Cells(index, 3).Value = C(i) 'å€¤ã‚’Cellã«æŒ¿å…¥ã—ã¦ã„ã‚‹
+        Cells(index, 4).Value = D(i) 'å€¤ã‚’Cellã«æŒ¿å…¥ã—ã¦ã„ã‚‹
         
     Next i
             
@@ -95,17 +97,17 @@ End Sub
 '@param     void
 '@return    void
 '
-'Å‰‚ÌÀs‚Éˆê“x‚¾‚¯Às‚³‚ê‚éBƒZƒ‹‚ğ‚Ü‚Á‚³‚ç‚Èó‘Ô‚É–ß‚·B
+'æœ€åˆã®å®Ÿè¡Œæ™‚ã«ä¸€åº¦ã ã‘å®Ÿè¡Œã•ã‚Œã‚‹ã€‚ã‚»ãƒ«ã‚’ã¾ã£ã•ã‚‰ãªçŠ¶æ…‹ã«æˆ»ã™ã€‚
 '
 '--------------------------------------------------------------
 Sub syokika_onClick()
-    '‰Šú‰»
-    Max_i = Worksheets(SheetName).Range("A" & rows.count).End(xlUp).Row              '‘I‘ğ‚µ‚Ä‚éƒV[ƒg‚ÌÅ‘å s ”æ“¾
+    'åˆæœŸåŒ–
+    Max_i = Worksheets(SheetName).Range("A" & rows.count).End(xlUp).Row              'é¸æŠã—ã¦ã‚‹ã‚·ãƒ¼ãƒˆã®æœ€å¤§ è¡Œ æ•°å–å¾—
     Worksheets(SheetName).Activate
     
     For i = 1 To Max_i
         
-        Cells(i, 1).Value = ""      '‰Šú‰»‚µ‚Ä‚¢‚é
+        Cells(i, 1).Value = ""      'åˆæœŸåŒ–ã—ã¦ã„ã‚‹
         Cells(i, 2).Value = ""
         Cells(i, 3).Value = ""
         Cells(i, 4).Value = ""
@@ -116,11 +118,11 @@ Sub syokika_onClick()
 End Sub
 
 '--------------------------------------------------------------
-'WEBƒTƒCƒg‚©‚çˆø—p
-'Ú‚µ‚­‚ÍFhttps://zukucode.com/2019/08/vba-array-loop.html
+'WEBã‚µã‚¤ãƒˆã‹ã‚‰å¼•ç”¨
+'è©³ã—ãã¯ï¼šhttps://zukucode.com/2019/08/vba-array-loop.html
 '
-'‹@”\Fˆø”‚ª”z—ñ‚©”»’è‚µA”z—ñ‚Ìê‡‚Í‹ó‚©‚Ç‚¤‚©‚à”»’è‚·‚é
-'–ß‚è’lF”»’èŒ‹‰Êi1:”z—ñ / 0:‹ó‚Ì”z—ñ / -1:”z—ñ‚Å‚Í‚È‚¢
+'æ©Ÿèƒ½ï¼šå¼•æ•°ãŒé…åˆ—ã‹åˆ¤å®šã—ã€é…åˆ—ã®å ´åˆã¯ç©ºã‹ã©ã†ã‹ã‚‚åˆ¤å®šã™ã‚‹
+'æˆ»ã‚Šå€¤ï¼šåˆ¤å®šçµæœï¼ˆ1:é…åˆ— / 0:ç©ºã®é…åˆ— / -1:é…åˆ—ã§ã¯ãªã„
 '--------------------------------------------------------------
 Public Function isArrayEx(varArray As Variant) As Long
 On Error GoTo ERROR_
@@ -136,6 +138,6 @@ ERROR_:
     If Err.Number = 9 Then
         isArrayEx = -1
     Else
-        '‘z’èŠOƒGƒ‰[
+        'æƒ³å®šå¤–ã‚¨ãƒ©ãƒ¼
     End If
 End Function
