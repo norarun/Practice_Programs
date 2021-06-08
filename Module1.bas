@@ -20,7 +20,7 @@ Sub SampleMain_onClick()
 On Error GoTo ERROR_
     Dim A() As String   '配列
     Dim B() As String   '配列
-    Dim C() As Date     '配列
+    Dim C() As String   '配列
     Dim D() As String   '配列
     
     Call syokika_onClick                        '初期化、ユーザーメソッド
