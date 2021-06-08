@@ -3,84 +3,85 @@ Attribute VB_Name = "Module1"
 '
 'file:  test
 'Date:  2021/06/09
-'—p“r:  ‘¼ƒV[ƒg‚©‚çğŒ‚É‚ ‚éî•ñ‚ğ‚Ü‚Æ‚ß‚é
+'ç”¨é€”:  ä»–ã‚·ãƒ¼ãƒˆã‹ã‚‰æ¡ä»¶ã«ã‚ã‚‹æƒ…å ±ã‚’ã¾ã¨ã‚ã‚‹
 '
 'ver. 2.0
 '================================
 
-'’è”
-Const SheetName As String = "Sheet4"            '<<‚±‚±‚ÉAo—Í‚µ‚½‚¢ƒV[ƒg‚Ì–¼‘O‚ğ“ü‚ê‚é>>
-Const require As Date = "2021/3/1  0:00:00"     '<<‚±‚±‚ÍAğŒADate‚É‚È‚Á‚Ä‚é‚Ì‚ÅğŒ‚É‡‚í‚¹‚Ä•Ï”éŒ¾‚µ‚Ä‚­‚¾‚³‚¢B>>
+'å®šæ•°
+Const SheetName As String = "Sheet4"            '<<ã“ã“ã«ã€å‡ºåŠ›ã—ãŸã„ã‚·ãƒ¼ãƒˆã®åå‰ã‚’å…¥ã‚Œã‚‹>>
+Const require As Date = "2021/3/1  0:00:00"     '<<ã“ã“ã¯ã€æ¡ä»¶ã€Dateã«ãªã£ã¦ã‚‹ã®ã§æ¡ä»¶ã«åˆã‚ã›ã¦å¤‰æ•°å®£è¨€ã—ã¦ãã ã•ã„ã€‚>>
+Const item As String = "date"                   '<<ã“ã“ã«ã€é …ç›®ã®åå‰(ä¾‹ãˆã°"id"ã‚„"æ—¥ä»˜")ã‚’å…¥ã‚Œã‚‹>>
 
 '***********************
-'ƒƒCƒ“
+'ãƒ¡ã‚¤ãƒ³
 '***********************
 Sub SampleMain_onClick()
 On Error GoTo ERROR_
-    Dim A() As String   '”z—ñ
-    Dim B() As String   '”z—ñ
-    Dim C() As Date     '”z—ñ
-    Dim D() As String   '”z—ñ
+    Dim A() As String   'é…åˆ—
+    Dim B() As String   'é…åˆ—
+    Dim C() As Date     'é…åˆ—
+    Dim D() As String   'é…åˆ—
     
-    Call syokika_onClick                        '‰Šú‰»Aƒ†[ƒU[ƒƒ\ƒbƒh
+    Call syokika_onClick                        'åˆæœŸåŒ–ã€ãƒ¦ãƒ¼ã‚¶ãƒ¼ãƒ¡ã‚½ãƒƒãƒ‰
     
-    Application.ScreenUpdating = False          '‰æ–Êˆ—STOP
+    Application.ScreenUpdating = False          'ç”»é¢å‡¦ç†STOP
     
-    'ƒV[ƒg1‚©‚çƒXƒ^[ƒgA˜A‘z”z—ñ
+    'ã‚·ãƒ¼ãƒˆ1ã‹ã‚‰ã‚¹ã‚¿ãƒ¼ãƒˆã€é€£æƒ³é…åˆ—
     For Each mySheet In Worksheets
-        If Not mySheet.Name = SheetName Then                 '‚à‚µAo—Íw’èƒV[ƒg‚È‚ç”ò‚Î‚·
+        If Not mySheet.Name = SheetName Then                 'ã‚‚ã—ã€å‡ºåŠ›æŒ‡å®šã‚·ãƒ¼ãƒˆãªã‚‰é£›ã°ã™
         
-            Max_i = Worksheets(mySheet.Name).Range("A" & rows.count).End(xlUp).Row              '‘I‘ğ‚µ‚Ä‚éƒV[ƒg‚ÌÅ‘å s ”æ“¾
+            Max_i = Worksheets(mySheet.Name).Range("A" & rows.count).End(xlUp).Row              'é¸æŠã—ã¦ã‚‹ã‚·ãƒ¼ãƒˆã®æœ€å¤§ è¡Œ æ•°å–å¾—
             Worksheets(mySheet.Name).Activate
             
-            '‘}“ü
+            'æŒ¿å…¥
             For i = 1 To (Max_i - 1)
             
-                If require <= Cells(1, IndexUpdate(mySheet.Name, "date")).Value Then    'ğŒ ƒGƒ‰[‚Ìê‡ ""‚Ì’†g‚ªˆê’v‚µ‚Ä‚é‚©Šm”F‚µ‚Ä‚İ‚Ä
+                If require <= Cells(1, IndexUpdate(mySheet.Name, item)).Value Then    'æ¡ä»¶ ã‚¨ãƒ©ãƒ¼ã®å ´åˆ ""ã®ä¸­èº«ãŒä¸€è‡´ã—ã¦ã‚‹ã‹ç¢ºèªã—ã¦ã¿ã¦
                 
-                    If isArrayEx(A) = -1 Then               '‰Šú‰»‚Ì”»’èAƒ†[ƒU[ƒƒ\ƒbƒh
+                    If isArrayEx(A) = -1 Then               'åˆæœŸåŒ–ã®åˆ¤å®šã€ãƒ¦ãƒ¼ã‚¶ãƒ¼ãƒ¡ã‚½ãƒƒãƒ‰
                         
-                        ReDim Preserve A(0)                 '‰Šú‰»‚³‚ê‚Ä‚¢‚È‚¢‚Ì‚Å‰Šú‰»
-                        ReDim Preserve B(0)                 '‰Šú‰»‚³‚ê‚Ä‚¢‚È‚¢‚Ì‚Å‰Šú‰»
-                        ReDim Preserve C(0)                 '‰Šú‰»‚³‚ê‚Ä‚¢‚È‚¢‚Ì‚Å‰Šú‰»
-                        ReDim Preserve D(0)                 '‰Šú‰»‚³‚ê‚Ä‚¢‚È‚¢‚Ì‚Å‰Šú‰»
+                        ReDim Preserve A(0)                 'åˆæœŸåŒ–ã•ã‚Œã¦ã„ãªã„ã®ã§åˆæœŸåŒ–
+                        ReDim Preserve B(0)                 'åˆæœŸåŒ–ã•ã‚Œã¦ã„ãªã„ã®ã§åˆæœŸåŒ–
+                        ReDim Preserve C(0)                 'åˆæœŸåŒ–ã•ã‚Œã¦ã„ãªã„ã®ã§åˆæœŸåŒ–
+                        ReDim Preserve D(0)                 'åˆæœŸåŒ–ã•ã‚Œã¦ã„ãªã„ã®ã§åˆæœŸåŒ–
                         
                     Else
                         
-                        ReDim Preserve A(UBound(A) + 1)     '”z—ñ‚ğ‘‚â‚·
-                        ReDim Preserve B(UBound(B) + 1)     '”z—ñ‚ğ‘‚â‚·
-                        ReDim Preserve C(UBound(C) + 1)     '”z—ñ‚ğ‘‚â‚·
-                        ReDim Preserve D(UBound(D) + 1)     '”z—ñ‚ğ‘‚â‚·
+                        ReDim Preserve A(UBound(A) + 1)     'é…åˆ—ã‚’å¢—ã‚„ã™
+                        ReDim Preserve B(UBound(B) + 1)     'é…åˆ—ã‚’å¢—ã‚„ã™
+                        ReDim Preserve C(UBound(C) + 1)     'é…åˆ—ã‚’å¢—ã‚„ã™
+                        ReDim Preserve D(UBound(D) + 1)     'é…åˆ—ã‚’å¢—ã‚„ã™
                         
                     End If
                     
-                    A(UBound(A)) = Cells(i + 1, 1).Value    '’l‚ğ‘}“ü‚µ‚Ä‚¢‚é
-                    B(UBound(B)) = Cells(i + 1, 2).Value    '’l‚ğ‘}“ü‚µ‚Ä‚¢‚é
-                    C(UBound(C)) = Cells(i + 1, 3).Value    '’l‚ğ‘}“ü‚µ‚Ä‚¢‚é
-                    D(UBound(D)) = Cells(i + 1, 4).Value    '’l‚ğ‘}“ü‚µ‚Ä‚¢‚é
+                    A(UBound(A)) = Cells(i + 1, 1).Value    'å€¤ã‚’æŒ¿å…¥ã—ã¦ã„ã‚‹
+                    B(UBound(B)) = Cells(i + 1, 2).Value    'å€¤ã‚’æŒ¿å…¥ã—ã¦ã„ã‚‹
+                    C(UBound(C)) = Cells(i + 1, 3).Value    'å€¤ã‚’æŒ¿å…¥ã—ã¦ã„ã‚‹
+                    D(UBound(D)) = Cells(i + 1, 4).Value    'å€¤ã‚’æŒ¿å…¥ã—ã¦ã„ã‚‹
                     
                 End If
             Next i
         End If
     Next
     
-    '•\¦
-    Application.ScreenUpdating = True       '‰æ–Êˆ—ŠJn
+    'è¡¨ç¤º
+    Application.ScreenUpdating = True       'ç”»é¢å‡¦ç†é–‹å§‹
     Worksheets(SheetName).Activate
             
     For i = 1 To (UBound(A))
         index = i
     
-        Cells(index, 1).Value = A(i) '’l‚ğCell‚É‘}“ü‚µ‚Ä‚¢‚é
-        Cells(index, 2).Value = B(i) '’l‚ğCell‚É‘}“ü‚µ‚Ä‚¢‚é
-        Cells(index, 3).Value = C(i) '’l‚ğCell‚É‘}“ü‚µ‚Ä‚¢‚é
-        Cells(index, 4).Value = D(i) '’l‚ğCell‚É‘}“ü‚µ‚Ä‚¢‚é
+        Cells(index, 1).Value = A(i) 'å€¤ã‚’Cellã«æŒ¿å…¥ã—ã¦ã„ã‚‹
+        Cells(index, 2).Value = B(i) 'å€¤ã‚’Cellã«æŒ¿å…¥ã—ã¦ã„ã‚‹
+        Cells(index, 3).Value = C(i) 'å€¤ã‚’Cellã«æŒ¿å…¥ã—ã¦ã„ã‚‹
+        Cells(index, 4).Value = D(i) 'å€¤ã‚’Cellã«æŒ¿å…¥ã—ã¦ã„ã‚‹
         
     Next i
     
 ERROR_:
     If Err.Number = 1004 Then
-        MsgBox "38s–Ú:IF‚Ìw’è€–Ú‚ª‘¶İ‚µ‚Ä‚¢‚È‚¢‰Â”\«‚ª‚ ‚è‚Ü‚·BÄ“xŠm”F‚µ‚Ä‚­‚¾‚³‚¢B", vbOKOnly
+        MsgBox "38è¡Œç›®:IFã®æŒ‡å®šé …ç›®ãŒå­˜åœ¨ã—ã¦ã„ãªã„å¯èƒ½æ€§ãŒã‚ã‚Šã¾ã™ã€‚å†åº¦ç¢ºèªã—ã¦ãã ã•ã„ã€‚", vbOKOnly
     Else
     'any error's
     End If
@@ -92,39 +93,39 @@ End Sub
 '@param     void
 '@return    void
 '
-'Å‰‚ÌÀs‚Éˆê“x‚¾‚¯Às‚³‚ê‚éBƒZƒ‹‚ğ‚Ü‚Á‚³‚ç‚Èó‘Ô‚É–ß‚·B
+'æœ€åˆã®å®Ÿè¡Œæ™‚ã«ä¸€åº¦ã ã‘å®Ÿè¡Œã•ã‚Œã‚‹ã€‚ã‚»ãƒ«ã‚’ã¾ã£ã•ã‚‰ãªçŠ¶æ…‹ã«æˆ»ã™ã€‚
 '
 '--------------------------------------------------------------
 Sub syokika_onClick()
-    Application.ScreenUpdating = False          '‰æ–Êˆ—STOP
+    Application.ScreenUpdating = False          'ç”»é¢å‡¦ç†STOP
     
-    '‰Šú‰»
-    Max_i = Worksheets(SheetName).Range("A" & rows.count).End(xlUp).Row              '‘I‘ğ‚µ‚Ä‚éƒV[ƒg‚ÌÅ‘å s ”æ“¾
+    'åˆæœŸåŒ–
+    Max_i = Worksheets(SheetName).Range("A" & rows.count).End(xlUp).Row              'é¸æŠã—ã¦ã‚‹ã‚·ãƒ¼ãƒˆã®æœ€å¤§ è¡Œ æ•°å–å¾—
     Worksheets(SheetName).Activate
     
     For i = 1 To Max_i
         
-        Cells(i, 1).Value = ""      '‰Šú‰»‚µ‚Ä‚¢‚é
+        Cells(i, 1).Value = ""      'åˆæœŸåŒ–ã—ã¦ã„ã‚‹
         Cells(i, 2).Value = ""
         Cells(i, 3).Value = ""
         Cells(i, 4).Value = ""
         
     Next i
     
-    Application.ScreenUpdating = True          '‰æ–Êˆ—STOP
+    Application.ScreenUpdating = True          'ç”»é¢å‡¦ç†STOP
 End Sub
 '--------------------------------------------------------------
 '
 'IndexUpdate
 '
-'@param     String      text    //ğŒ
-'@return    int         i       //“ú•t‚ÌˆÊ’u‚ğæ“¾
+'@param     String      text    //æ¡ä»¶
+'@return    int         i       //æ—¥ä»˜ã®ä½ç½®ã‚’å–å¾—
 '
-'ˆø”‚Ìtext‚Æ“¯‚¶€–Ú‚ª‚ ‚ê‚ÎA‚»‚±‚ÌˆÊ’u‚Ì’l‚ğ•Ô‚·B‚»‚¤‚Å‚È‚¯‚ê‚ÎƒGƒ‰[‚ğo—Í‚·‚éB
+'å¼•æ•°ã®textã¨åŒã˜é …ç›®ãŒã‚ã‚Œã°ã€ãã“ã®ä½ç½®ã®å€¤ã‚’è¿”ã™ã€‚ãã†ã§ãªã‘ã‚Œã°ã‚¨ãƒ©ãƒ¼ã‚’å‡ºåŠ›ã™ã‚‹ã€‚
 '
 '--------------------------------------------------------------
 Function IndexUpdate(mySheet As String, text As String) As Integer
-    Max_c = Worksheets(mySheet).Cells(1, Columns.count).End(xlToLeft).Column               '‘I‘ğ‚µ‚Ä‚éƒV[ƒg‚ÌÅ‘å —ñ ”æ“¾
+    Max_c = Worksheets(mySheet).Cells(1, Columns.count).End(xlToLeft).Column               'é¸æŠã—ã¦ã‚‹ã‚·ãƒ¼ãƒˆã®æœ€å¤§ åˆ— æ•°å–å¾—
     
     For C = 1 To Max_c
         If text = Cells(1, C).Value Then
@@ -137,11 +138,11 @@ Function IndexUpdate(mySheet As String, text As String) As Integer
 End Function
 
 '--------------------------------------------------------------
-'WEBƒTƒCƒg‚©‚çˆø—p
-'Ú‚µ‚­‚ÍFhttps://zukucode.com/2019/08/vba-array-loop.html
+'WEBã‚µã‚¤ãƒˆã‹ã‚‰å¼•ç”¨
+'è©³ã—ãã¯ï¼šhttps://zukucode.com/2019/08/vba-array-loop.html
 '
-'‹@”\Fˆø”‚ª”z—ñ‚©”»’è‚µA”z—ñ‚Ìê‡‚Í‹ó‚©‚Ç‚¤‚©‚à”»’è‚·‚é
-'–ß‚è’lF”»’èŒ‹‰Êi1:”z—ñ / 0:‹ó‚Ì”z—ñ / -1:”z—ñ‚Å‚Í‚È‚¢
+'æ©Ÿèƒ½ï¼šå¼•æ•°ãŒé…åˆ—ã‹åˆ¤å®šã—ã€é…åˆ—ã®å ´åˆã¯ç©ºã‹ã©ã†ã‹ã‚‚åˆ¤å®šã™ã‚‹
+'æˆ»ã‚Šå€¤ï¼šåˆ¤å®šçµæœï¼ˆ1:é…åˆ— / 0:ç©ºã®é…åˆ— / -1:é…åˆ—ã§ã¯ãªã„
 '--------------------------------------------------------------
 Public Function isArrayEx(varArray As Variant) As Long
 On Error GoTo ERROR_
@@ -157,6 +158,6 @@ ERROR_:
     If Err.Number = 9 Then
         isArrayEx = -1
     Else
-        '‘z’èŠOƒGƒ‰[
+        'æƒ³å®šå¤–ã‚¨ãƒ©ãƒ¼
     End If
 End Function
